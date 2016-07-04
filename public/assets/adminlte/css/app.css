@@ -1,0 +1,21 @@
+.btn-view {
+    color: #286090 !important;
+}
+
+.btn-edit {
+    color: #69aa46 !important;
+
+}
+
+.btn-delete {
+    color: #dd5a43 !important;
+}
+
+.hvr-grow {
+    transition-duration: 0.1s;
+}
+
+.hvr-grow:hover {
+    -webkit-transform: scale(1.3);
+    transform: scale(1.3);
+}

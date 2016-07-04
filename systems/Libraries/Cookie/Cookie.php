@@ -1,0 +1,184 @@
+<?php
+/*///////////////////////////////////////////////////////////////
+ /** ID: | /-- ID: Indonesia
+ /** EN: | /-- EN: English
+ ///////////////////////////////////////////////////////////////*/
+
+/**
+ * ID: Cookie - Library untuk framework kecik, library ini khusus untuk membantu masalah Cookie
+ * EN: Cookie - Library for Divalia Framework, this library specially for help Cookie problem
+ *
+ * @author        Dony Wahyu Isp
+ * @copyright    2015 Dony Wahyu Isp
+ * @link        http://github.com/kecik-framework/cookie
+ * @license        MIT
+ * @version    1.0.1-alpha
+ * @package        Divalia\Cookie
+ **/
+namespace Divalia;
+
+/**
+ * Cookie
+ * @package    Divalia\Cokie
+ * @author        Dony Wahyu Isp
+ * @since        1.0.0-alpha
+ **/
+class Cookie
+{
+    /**
+     * @var bool $status
+     **/
+    private $status = FALSE;
+
+    /**
+     * @var string $key
+     **/
+
+    private $key;
+    /**
+     * @var string $iv
+     **/
+    private $iv;
+
+
+    /**
+     * Constuctor
+     * @param Divalia $app
+     **/
+    public function __construct()
+    {
+        $app = Divalia::getInstance();
+        $config = $app->config;
+        $this->status = $config->get('cookie.encrypt');
+        if (empty($this->status))
+            $this->status = FALSE;
+        else {
+            $key = $config->get('cookie.encrypt.key');
+            if (empty($key))
+                $this->key = pack('H*', $key);
+            else
+                $this->key = pack('H*', "bcb04b7e103a0cd8b54763051cef08bc55abe029fdebae5e1d417e2ffb2a00a3");
+
+            if (empty($_COOKIE['eivk' . md5($app->url->baseUrl())]) || !ctype_print($_COOKIE['eivk' . md5($app->url->baseUrl())]))
+                unset($_SESSION['eivk' . md5($app->url->baseUrl())]);
+
+            if (empty($_COOKIE['eivk' . md5($app->url->baseUrl())]) && empty($_SESSION['eivk' . md5($app->url->baseUrl())])) {
+                $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
+                $this->iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+                $this->iv = base64_encode($this->iv);
+                setcookie('eivk' . md5($app->url->baseUrl()), $this->iv, 0, '/');
+                $_SESSION['eivk' . md5($app->url->baseUrl())] = $this->iv;
+            } else {
+                if (!empty($_SESSION['eivk' . md5($app->url->baseUrl())])) {
+                    $this->iv = $_SESSION['eivk' . md5($app->url->baseUrl())];
+                    setcookie('eivk' . md5($app->url->baseUrl()), $this->iv, 0, '/');
+                } elseif (!empty($_COOKIE['eivk' . md5($app->url->baseUrl())])) {
+                    $this->iv = $_COOKIE['eivk' . md5($app->url->baseUrl())];
+                    $_SESSION['eivk' . md5($app->url->baseUrl())] = $this->iv;
+                }
+            }
+
+        }
+
+    }
+
+    /**
+     * newIV
+     **/
+    public function newIV()
+    {
+        $app = Divalia::getInstance();
+        $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
+        $this->iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+        $this->iv = base64_encode($this->iv);
+        setcookie('eivk' . md5($app->url->baseUrl()), $this->iv, 0, '/');
+        $_SESSION['eivk' . md5($app->url->baseUrl())] = $this->iv;
+    }
+
+    /**
+     * set
+     * @param string $name
+     * @param mixed $value
+     **/
+    public function set($name, $value, $expire = 0, $path = '', $domain = '', $secure = FALSE, $httponly = FALSE)
+    {
+        $_COOKIE[$name] = $this->encrypt($value);
+        return setcookie($name, $_COOKIE[$name], $expire, $path, $domain, $secure, $httponly);
+    }
+
+    /**
+     * get
+     * @param string $name
+     * @return mixed
+     **/
+    public function get($name)
+    {
+        if (isset($_COOKIE[$name]))
+            return $this->decrypt($_COOKIE[$name]);
+        else
+            return NULL;
+    }
+
+    /**
+     * delete
+     * @param string $name
+     **/
+    public function delete($name)
+    {
+        if (isset($_COOKIE[$name]))
+            unset($_COOKIE[$name]);
+    }
+
+    /**
+     * clear
+     * ID: Hapus semua cookie | EN: delete all cookie
+     **/
+    public function clear()
+    {
+        while (list($name, $value) = each($_COOKIE)) {
+            $this->delete($name);
+        }
+    }
+
+    /**
+     * encrypt
+     * enkripsi cookie
+     * @param string $plaintext
+     * @return string
+     **/
+    private function encrypt($plaintext)
+    {
+        if (is_array($plaintext))
+            $ciphertext = json_encode($plaintext);
+        else
+            $ciphertext = $plaintext;
+
+        if ($this->status) {
+            $ciphertext = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $this->key, $ciphertext, MCRYPT_MODE_CBC, base64_decode($this->iv));
+        }
+
+        return base64_encode($ciphertext);
+    }
+
+    /**
+     * decrypt
+     * dekripsi cookie
+     * @param string $ciphertext
+     * @return mixed
+     **/
+    private function decrypt($ciphertext)
+    {
+        $plaintext = base64_decode($ciphertext);
+
+        if ($this->status) {
+            $plaintext = trim(mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $this->key, base64_decode($ciphertext), MCRYPT_MODE_CBC, base64_decode($this->iv)));
+            $plaintext_array = json_decode($plaintext, TRUE);
+
+            if ($plaintext_array) {
+                $plaintext = $plaintext_array;
+            }
+        }
+
+        return $plaintext;
+    }
+}
