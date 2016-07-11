@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="08b5b5f3-99c8-4c9a-8dcb-74ea0c5184a1" name="Default" comment="">
+    <list default="true" id="08b5b5f3-99c8-4c9a-8dcb-74ea0c5184a1" name="Default" comment="testing database">
       <change type="DELETED" beforePath="$PROJECT_DIR$/public/assets/corlate/js/kecik.js" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/public/assets/margo/js/kecik.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/server.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/Controllers/Corlate.php" afterPath="$PROJECT_DIR$/protected/Controllers/Corlate.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/protected/Controllers/Welcome.php" afterPath="$PROJECT_DIR$/protected/Controllers/Welcome.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/adminlte/js/divalia.js" afterPath="$PROJECT_DIR$/public/assets/adminlte/js/divalia.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/basic/js/divalia.js" afterPath="$PROJECT_DIR$/public/assets/basic/js/divalia.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/sb-admin/js/divalia.js" afterPath="$PROJECT_DIR$/public/assets/sb-admin/js/divalia.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.php" afterPath="$PROJECT_DIR$/server.php" />
     </list>
     <ignored path="framework.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -375,7 +373,7 @@
       <workItem from="1467617866583" duration="762000" />
       <workItem from="1467619547813" duration="587000" />
       <workItem from="1468220293627" duration="376000" />
-      <workItem from="1468220681323" duration="3009000" />
+      <workItem from="1468220681323" duration="3091000" />
     </task>
     <task id="LOCAL-00001" summary="Divalia Structure">
       <created>1467344779891</created>
@@ -433,11 +431,18 @@
       <option name="project" value="LOCAL" />
       <updated>1467617223412</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="testing database">
+      <created>1468223902921</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1468223902921</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33921000" />
+    <option name="totallyTimeSpent" value="34003000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1376" height="754" extended-state="6" />
@@ -480,7 +485,8 @@
     <MESSAGE value="fixing controller" />
     <MESSAGE value="fixing some bug" />
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="testing database" />
+    <option name="LAST_COMMIT_MESSAGE" value="testing database" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
