@@ -2,6 +2,7 @@
 namespace Controllers;
 
 use Divalia\Controller;
+use Models\Absensi;
 
 class Welcome extends Controller {
 

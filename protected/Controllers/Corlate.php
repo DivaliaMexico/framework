@@ -5,6 +5,7 @@ use Divalia\Controller;
 use Divalia\Divalia;
 
 class Corlate extends Controller {
+	
 	public function __construct() {
 		parent::__construct();
 

@@ -1,19 +1,10 @@
 /*
- * ID: Saya akan sangat berterimakasih jika anda memberikan donasi untuk ini, anda dapat memberikan donasi berapapun
- *     yang anda mau, saya juga akan mencantumkan nama anda sebagai donatur kedalam file khusus yang akan selalu
- *     disertakan dalam source code ini, saya tidak akan mencantum jumlah donasi, saya hanya mencantumkan nama saja. Tolong
- *     cantumkan keterangan dengan isi "Donasi Ajax Crud Bootstrap".
- * EN: I would be very grateful if you make a donation to this, you can donate whatever you want, I will put your name
- *     as a donor into a special file will always be included in the source code, I would not fasten the number of
- *     donations, I just included name only. Please include a description with the contents of the "Donate Ajax Crud Bootstrap".
  *
- * PayPal: dony_cavalera_md@yahoo.com
- * Rekening Mandiri: 113-000-6944-858, Atas Nama: Dony Wahyu Isprananda
  **/
 
-if (!('kecik' in window)) window['kecik'] = {}
-if (!('setting' in window['kecik'])) {
-    window['kecik'].setting = {
+if (!('divalia' in window)) window['divalia'] = {}
+if (!('setting' in window['divalia'])) {
+    window['divalia'].setting = {
         'base_url': '',
         'create_url': '',
         'update_url': '',
@@ -57,17 +48,17 @@ if (!('setting' in window['kecik'])) {
     }
 }
 
-kecik.set = function (varname, value) {
-    kecik.setting[varname] = value;
+divalia.set = function (varname, value) {
+    divalia.setting[varname] = value;
 };
 
 
-kecik.init = function (config) {
+divalia.init = function (config) {
     $.each(config, function (key, val) {
-        kecik.setting[key] = val;
+        divalia.setting[key] = val;
     });
 
-    if (kecik.setting.bootstrap_convert === true) {
+    if (divalia.setting.bootstrap_convert === true) {
         //** Replace Input Submit to Button Tag
         $("input[type=submit]").replaceWith(function () {
             var replacement = $('<button>').html($(this).val());
@@ -104,37 +95,37 @@ kecik.init = function (config) {
             return replacement;
         });
 
-        //$(kecik.setting.form+" input").not('input[type=button]').not('input[type=submit]').not('input[type=reset]').addClass('form-control');
-        $(kecik.setting.form + " input").not('input[type=file]').addClass('form-control');
-        $(kecik.setting.form + " textarea").addClass('form-control');
+        //$(divalia.setting.form+" input").not('input[type=button]').not('input[type=submit]').not('input[type=reset]').addClass('form-control');
+        $(divalia.setting.form + " input").not('input[type=file]').addClass('form-control');
+        $(divalia.setting.form + " textarea").addClass('form-control');
 
-        if (!$(kecik.setting.btn_add).hasClass('btn')) {
-            $(kecik.setting.btn_add).addClass('btn btn-success');
-            $(kecik.setting.btn_add).prepend('<i class="fa fa-plus"></i> ');
+        if (!$(divalia.setting.btn_add).hasClass('btn')) {
+            $(divalia.setting.btn_add).addClass('btn btn-success');
+            $(divalia.setting.btn_add).prepend('<i class="fa fa-plus"></i> ');
         }
 
-        if (!$(kecik.setting.btn_save).hasClass('btn')) {
-            $(kecik.setting.btn_save).addClass('btn btn-primary');
-            $(kecik.setting.btn_save).prepend('<i class="fa fa-floppy-o"></i> ');
+        if (!$(divalia.setting.btn_save).hasClass('btn')) {
+            $(divalia.setting.btn_save).addClass('btn btn-primary');
+            $(divalia.setting.btn_save).prepend('<i class="fa fa-floppy-o"></i> ');
         }
 
-        if (!$(kecik.setting.btn_cancel).hasClass('btn')) {
-            $(kecik.setting.btn_cancel).addClass('btn btn-danger');
-            $(kecik.setting.btn_cancel).prepend('<i class="fa fa-close"></i> ');
+        if (!$(divalia.setting.btn_cancel).hasClass('btn')) {
+            $(divalia.setting.btn_cancel).addClass('btn btn-danger');
+            $(divalia.setting.btn_cancel).prepend('<i class="fa fa-close"></i> ');
         }
 
-        /*if (!$(kecik.setting.form).hasClass('form-horizontal')) {
-         $(kecik.setting.form).addClass('well form-horizontal');
-         $(kecik.setting.form).attr('enctype',"multipart/form-data");
+        /*if (!$(divalia.setting.form).hasClass('form-horizontal')) {
+         $(divalia.setting.form).addClass('well form-horizontal');
+         $(divalia.setting.form).attr('enctype',"multipart/form-data");
          if (typeof $.fn.dropzone !== 'undefined' && $('input[type=file]').length >0 ) {
-         $(kecik.setting.form).addClass('dropzone');
+         $(divalia.setting.form).addClass('dropzone');
          }
          }*/
 
-        $(kecik.setting.form).attr('method', 'POST');
-        $(kecik.setting.form).attr('action', kecik.setting.insert_url);
+        $(divalia.setting.form).attr('method', 'POST');
+        $(divalia.setting.form).attr('action', divalia.setting.insert_url);
 
-        if ($(kecik.setting.form_view).length <= 0) {
+        if ($(divalia.setting.form_view).length <= 0) {
             form_view = '<div class="modal-dialog"> \
                         <div class="modal-content"> \
                             <div class="modal-header"> \
@@ -148,11 +139,11 @@ kecik.init = function (config) {
                         </div> \
                     </div>';
 
-            $('body').append('<div id="' + kecik.setting.form_view.replace('#', '').replace('.', '') + '" class="modal fade" aria-hidden="true" role="dialog"></div>');
-            $(kecik.setting.form_view).html(form_view);
+            $('body').append('<div id="' + divalia.setting.form_view.replace('#', '').replace('.', '') + '" class="modal fade" aria-hidden="true" role="dialog"></div>');
+            $(divalia.setting.form_view).html(form_view);
         }
 
-        if ($(kecik.setting.loading).length <= 0) {
+        if ($(divalia.setting.loading).length <= 0) {
             loading = '<div class="modal-dialog"> \
                         <div class="modal-content"> \
                             <div class="modal-header"> \
@@ -167,21 +158,21 @@ kecik.init = function (config) {
                         </div> \
                     </div>';
 
-            $('body').append('<div id="' + kecik.setting.loading.replace('#', '').replace('.', '') + '" class="modal fade" aria-hidden="true" role="dialog"></div>');
-            $(kecik.setting.loading).html(loading);
+            $('body').append('<div id="' + divalia.setting.loading.replace('#', '').replace('.', '') + '" class="modal fade" aria-hidden="true" role="dialog"></div>');
+            $(divalia.setting.loading).html(loading);
         }
 
-        if (!$(kecik.setting.form).hasClass('form-horizontal')) {
-            $(kecik.setting.form).addClass('well form-horizontal');
-            $(kecik.setting.form).attr('enctype', "multipart/form-data");
+        if (!$(divalia.setting.form).hasClass('form-horizontal')) {
+            $(divalia.setting.form).addClass('well form-horizontal');
+            $(divalia.setting.form).attr('enctype', "multipart/form-data");
 
             if (typeof $.fn.dropzone !== 'undefined' && $('input[type=file]').length > 0) {
-                $(kecik.setting.form).addClass('dropzone');
+                $(divalia.setting.form).addClass('dropzone');
             }
 
-            $(kecik.setting.form).prepend($('<fieldset id="' + kecik.setting.form_fieldset.replace('#', '').replace('.', '') + '"></fieldset>'));
+            $(divalia.setting.form).prepend($('<fieldset id="' + divalia.setting.form_fieldset.replace('#', '').replace('.', '') + '"></fieldset>'));
 
-            $(kecik.setting.form).children().not('fieldset').each(function () {
+            $(divalia.setting.form).children().not('fieldset').each(function () {
 
                 if ($(this).prop('tagName').toLowerCase() != 'fieldset') {
                     if ($(this).prop('tagName').toLowerCase() == 'label') {
@@ -194,38 +185,38 @@ kecik.init = function (config) {
                     $(this).attr('type') != 'hidden'
                 ) {
                     view = $(this).prev().prop('outerHTML');
-                    view += '<div class="col-sm-3"><p id="' + $(this).attr('id') + '" class="form-control-static ' + kecik.setting.view_class + '"></p></div>';
+                    view += '<div class="col-sm-3"><p id="' + $(this).attr('id') + '" class="form-control-static ' + divalia.setting.view_class + '"></p></div>';
 
-                    $(kecik.setting.form_view).find('.well.form-horizontal').append($('<div class="form-group"></div>').html(view));
+                    $(divalia.setting.form_view).find('.well.form-horizontal').append($('<div class="form-group"></div>').html(view));
 
-                    input = $(this).prev().wrap('<div class="form-group"></div>').parent().append($('<div class="col-sm-3"></div>').html($(this).addClass(kecik.setting.field_class)));
+                    input = $(this).prev().wrap('<div class="form-group"></div>').parent().append($('<div class="col-sm-3"></div>').html($(this).addClass(divalia.setting.field_class)));
 
-                    $(kecik.setting.form + ' fieldset').append(input);
+                    $(divalia.setting.form + ' fieldset').append(input);
                 }
 
             });
 
-            $(kecik.setting.form + ' fieldset').append($(kecik.setting.form + ' input[type=hidden]'));
-            $(kecik.setting.form + ' fieldset').append($(kecik.setting.form + ' button'));
-            $(kecik.setting.form + ' button').wrapAll('<div class="clearfix form-actions"></div>').wrapAll('<div class="col-md-offset-3 col-md-9"></div>');
+            $(divalia.setting.form + ' fieldset').append($(divalia.setting.form + ' input[type=hidden]'));
+            $(divalia.setting.form + ' fieldset').append($(divalia.setting.form + ' button'));
+            $(divalia.setting.form + ' button').wrapAll('<div class="clearfix form-actions"></div>').wrapAll('<div class="col-md-offset-3 col-md-9"></div>');
 
-            $(kecik.setting.form).wrapAll('<div id="' + kecik.setting.form_box.replace('#', '').replace('.', '') + '"></div>');
+            $(divalia.setting.form).wrapAll('<div id="' + divalia.setting.form_box.replace('#', '').replace('.', '') + '"></div>');
         }
 
     }
 
     $('.hidden_input').hide();
-    $(kecik.setting.form_box).hide();
-    $(kecik.setting.form_view).hide();
+    $(divalia.setting.form_box).hide();
+    $(divalia.setting.form_view).hide();
 
 
     if (typeof $.fn.select2 !== 'undefined') {
-        $(kecik.setting.form + " select").addClass('select2');
-        $(kecik.setting.form + " select").css('width', '100%');
+        $(divalia.setting.form + " select").addClass('select2');
+        $(divalia.setting.form + " select").css('width', '100%');
     }
 
-    if (!$(kecik.setting.form + " select").hasClass('select2')) {
-        $(kecik.setting.form + " select").addClass('form-control');
+    if (!$(divalia.setting.form + " select").hasClass('select2')) {
+        $(divalia.setting.form + " select").addClass('form-control');
     }
 
     if (typeof $.fn.select2 !== 'undefined') {
@@ -312,12 +303,12 @@ kecik.init = function (config) {
 
     $(document).ajaxStop(function () {
         if (process == true) process = false;
-        $(kecik.setting.loading).modal('hide');
+        $(divalia.setting.loading).modal('hide');
     });
 
     $(document).ajaxError(function (e, x, settings, exception) {
         if (process == true) process = false;
-        $(kecik.setting.loading).modal('hide');
+        $(divalia.setting.loading).modal('hide');
 
         var url = settings.url;
         var method = settings.type;
@@ -341,18 +332,18 @@ kecik.init = function (config) {
         }
     });
 
-    //$('.' + kecik.setting.filter_class + ':first').focus();
+    //$('.' + divalia.setting.filter_class + ':first').focus();
 
     $('.dataTables_filter input').focus();
 
-    $(kecik.setting.btn_add).bind('click', function () {
-        $(kecik.setting.form_box).show();
-        $('.' + kecik.setting.field_class + ':first').focus();
+    $(divalia.setting.btn_add).bind('click', function () {
+        $(divalia.setting.form_box).show();
+        $('.' + divalia.setting.field_class + ':first').focus();
     });
 
-    $(kecik.setting.btn_cancel).bind('click', function () {
-        $(kecik.setting.form_box).hide();
-        kecik.clearform();
+    $(divalia.setting.btn_cancel).bind('click', function () {
+        $(divalia.setting.form_box).hide();
+        divalia.clearform();
     });
 
     $(".filter").focus(function () {
@@ -360,15 +351,15 @@ kecik.init = function (config) {
     });
 
 
-    $('form' + kecik.setting.form).on('submit', function (event) {
+    $('form' + divalia.setting.form).on('submit', function (event) {
         var form = $(this);
         var file_input = $(this).find('input[type=file]');
 
-        $(kecik.setting.loading).modal('show');
+        $(divalia.setting.loading).modal('show');
         event.preventDefault();
 
-        if ($.isFunction(kecik.setting.before_submit_func)) {
-            if (kecik.setting.before_submit_func() === false) return false;
+        if ($.isFunction(divalia.setting.before_submit_func)) {
+            if (divalia.setting.before_submit_func() === false) return false;
         }
 
         var form_serial = form.serialize();
@@ -448,8 +439,8 @@ kecik.init = function (config) {
 
                 if (result == '') {
                     //alert(result.message + ". Lokasi Server: " + result.url)
-                    var oTable = $(kecik.setting.table).dataTable();
-                    $.post(kecik.setting.find_url, null, function (json) {
+                    var oTable = $(divalia.setting.table).dataTable();
+                    $.post(divalia.setting.find_url, null, function (json) {
                         oTable.fnClearTable();
                         if (json.data.length > 0) {
                             oTable.fnAddData(json.data);
@@ -461,34 +452,34 @@ kecik.init = function (config) {
                     alert("File gagal terupload. " + result.message);
                 }
 
-                kecik.clearform();
-                $(kecik.setting.form_box).hide();
+                divalia.clearform();
+                $(divalia.setting.form_box).hide();
 
-                if ($.isFunction(kecik.setting.after_submit_func)) {
-                    if (kecik.setting.after_submit_func() === false) return false;
+                if ($.isFunction(divalia.setting.after_submit_func)) {
+                    if (divalia.setting.after_submit_func() === false) return false;
                 }
             }).fail(function (res) {
                 upload_in_progress = false;
                 alert("There was an error");
-                kecik.clearform();
-                $(kecik.setting.form_box).hide();
+                divalia.clearform();
+                $(divalia.setting.form_box).hide();
             });
 
             deferred.promise();
             return false;
         } else {
-            $(kecik.setting.form_fieldset).attr('disabled', true);
+            $(divalia.setting.form_fieldset).attr('disabled', true);
             $.post(form.attr('action'), form_serial, function (data) {
 
-                kecik.clearform();
-                $(kecik.setting.form_box).hide();
+                divalia.clearform();
+                $(divalia.setting.form_box).hide();
 
-                if ($.isFunction(kecik.setting.after_submit_func)) {
-                    if (kecik.setting.after_submit_func() === false) return false;
+                if ($.isFunction(divalia.setting.after_submit_func)) {
+                    if (divalia.setting.after_submit_func() === false) return false;
                 }
 
-                var oTable = $(kecik.setting.table).dataTable();
-                $.post(kecik.setting.find_url, null, function (json) {
+                var oTable = $(divalia.setting.table).dataTable();
+                $.post(divalia.setting.find_url, null, function (json) {
                     oTable.fnClearTable();
                     if (json.data.length > 0) {
                         oTable.fnAddData(json.data);
@@ -516,7 +507,7 @@ kecik.init = function (config) {
                                 </button> \
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">';
 
-                $.each(kecik.setting.table_actions, function (label, data) {
+                $.each(divalia.setting.table_actions, function (label, data) {
                     actions += '<a  class="' + data.class + '" href="#' + label + '" onClick="return ' + data.action + '(' + id + ')" title="' + data.desc + '"> \
                                     <i class="' + data.icon + ' fa-lg hvr-grow-shadow"></i> \
                                 </a>';
@@ -540,35 +531,35 @@ kecik.init = function (config) {
     ];
 
 
-    var column = $.merge(action, kecik.setting.table_column);
+    var column = $.merge(action, divalia.setting.table_column);
 
-    if (kecik.setting.table_convert === true) {
+    if (divalia.setting.table_convert === true) {
 
-        if (!$(kecik.setting.table).hasClass('table')) {
-            head = $(kecik.setting.table).find('thead tr');
+        if (!$(divalia.setting.table).hasClass('table')) {
+            head = $(divalia.setting.table).find('thead tr');
             head.addClass('navbar-default');
             head.prepend('<th>&nbsp;</th>');
         }
 
-        if (!$(kecik.setting.table).hasClass('table'))
-            $(kecik.setting.table).addClass('table');
+        if (!$(divalia.setting.table).hasClass('table'))
+            $(divalia.setting.table).addClass('table');
 
-        if (!$(kecik.setting.table).hasClass('table-striped'))
-            $(kecik.setting.table).addClass('table-striped');
+        if (!$(divalia.setting.table).hasClass('table-striped'))
+            $(divalia.setting.table).addClass('table-striped');
 
-        if (!$(kecik.setting.table).hasClass('table-hover'))
-            $(kecik.setting.table).addClass('table-hover');
+        if (!$(divalia.setting.table).hasClass('table-hover'))
+            $(divalia.setting.table).addClass('table-hover');
     }
 
-    $(kecik.setting.loading).modal('show');
-    var oTable = $(kecik.setting.table).dataTable({
+    $(divalia.setting.loading).modal('show');
+    var oTable = $(divalia.setting.table).dataTable({
         "ajax": {
-            "url": kecik.setting.find_url,
+            "url": divalia.setting.find_url,
             "type": "POST",
         },
         "processing": true,
         //"serverSide": true,
-        "order": kecik.setting.table_order,
+        "order": divalia.setting.table_order,
         "columns": column,
         "fnRowCallback": function (nRow, aData, iDisplayIndex, iDisplayIndexFull) {
             $('td', nRow).closest('tr').addClass(aData['status'] === 'false' ? 'danger' : '');
@@ -580,59 +571,59 @@ kecik.init = function (config) {
 
 };
 
-kecik.clearform = function (callback) {
-    $('input[type=text].' + kecik.setting.field_class).val('');
-    $('input[type=file].' + kecik.setting.field_class).val('');
-    $('input[type=hidden].' + kecik.setting.field_class).val('');
-    $('textarea.' + kecik.setting.field_class).val('');
-    $('.editor.' + kecik.setting.field_class).text('');
-    $('select.' + kecik.setting.field_class + ' option:first').attr('selected', 'selected');
+divalia.clearform = function (callback) {
+    $('input[type=text].' + divalia.setting.field_class).val('');
+    $('input[type=file].' + divalia.setting.field_class).val('');
+    $('input[type=hidden].' + divalia.setting.field_class).val('');
+    $('textarea.' + divalia.setting.field_class).val('');
+    $('.editor.' + divalia.setting.field_class).text('');
+    $('select.' + divalia.setting.field_class + ' option:first').attr('selected', 'selected');
     var select2 = $('select.form-data.select2');
     select2.each(function (i, item) {
         $(item).select2("destroy");
     });
     select2.select2();
-    $(kecik.setting.form).attr('action', kecik.setting.insert_url);
-    $('.foto_box.' + kecik.setting.field_class).hide();
-    $(kecik.setting.form_fieldset).attr('disabled', false);
-    if ($(kecik.setting.form)[0] !== 'undefined')
-        $(kecik.setting.form)[0].reset();
-    $(kecik.setting.loading).modal('hide');
+    $(divalia.setting.form).attr('action', divalia.setting.insert_url);
+    $('.foto_box.' + divalia.setting.field_class).hide();
+    $(divalia.setting.form_fieldset).attr('disabled', false);
+    if ($(divalia.setting.form)[0] !== 'undefined')
+        $(divalia.setting.form)[0].reset();
+    $(divalia.setting.loading).modal('hide');
 
     if ($.isFunction(callback))
-        kecik.setting.clear_func = callback;
-    else if ($.isFunction(kecik.setting.clear_func))
-        kecik.setting.clear_func();
+        divalia.setting.clear_func = callback;
+    else if ($.isFunction(divalia.setting.clear_func))
+        divalia.setting.clear_func();
 
     $('input[type=search]:first').focus();
 
 };
 
-kecik.Insert = function (callback) {
+divalia.Insert = function (callback) {
     if ($.isFunction(callback)) {
-        kecik.setting.insert_func = callback;
-    } else if ($.isFunction(kecik.setting.insert_func)) {
-        kecik.setting.insert_func();
+        divalia.setting.insert_func = callback;
+    } else if ($.isFunction(divalia.setting.insert_func)) {
+        divalia.setting.insert_func();
     }
 };
 
-kecik.Update = function (callback) {
+divalia.Update = function (callback) {
     if ($.isFunction(callback)) {
-        kecik.setting.update_func = callback;
-    } else if ($.isFunction(kecik.setting.update_func)) {
-        kecik.setting.update_func();
+        divalia.setting.update_func = callback;
+    } else if ($.isFunction(divalia.setting.update_func)) {
+        divalia.setting.update_func();
     }
 };
 
-kecik.Get = function (id, callback) {
+divalia.Get = function (id, callback) {
     var $data;
-    $(kecik.setting.loading).modal('show');
-    $.post(kecik.setting.get_url, // request ke file load_data.php
+    $(divalia.setting.loading).modal('show');
+    $.post(divalia.setting.get_url, // request ke file load_data.php
         id,
         function (data) {
 
             if (data.error == undefined) { // jika respon error tidak terdefinisi maka pengambilan data sukses
-                $(kecik.setting.form_box).show();
+                $(divalia.setting.form_box).show();
 
                 for (var x = 0; x < data.length; x++) {
                     $data = data[x];
@@ -666,18 +657,18 @@ kecik.Get = function (id, callback) {
                 }
 
                 if (typeof $.fn.select2 !== 'undefined') {
-                    $(".select2." + kecik.setting.field_class).select2('destroy');
-                    $(".select2." + kecik.setting.field_class).select2();
+                    $(".select2." + divalia.setting.field_class).select2('destroy');
+                    $(".select2." + divalia.setting.field_class).select2();
                 }
 
-                $('form').attr('action', kecik.setting.update_url);
+                $('form').attr('action', divalia.setting.update_url);
 
-                $('.' + kecik.setting.field_class + ':first').focus();
+                $('.' + divalia.setting.field_class + ':first').focus();
 
                 if ($.isFunction(callback))
-                    kecik.setting.get_func = callback;
-                else if ($.isFunction(kecik.setting.get_func))
-                    kecik.setting.get_func();
+                    divalia.setting.get_func = callback;
+                else if ($.isFunction(divalia.setting.get_func))
+                    divalia.setting.get_func();
 
             } else {
                 alert(data.error); // jika ada respon error tampilkan alert
@@ -686,32 +677,32 @@ kecik.Get = function (id, callback) {
         }, 'json');
 };
 
-kecik.Delete = function (id, callback) {
+divalia.Delete = function (id, callback) {
     bootbox.dialog({
-        message: kecik.setting.message_delete,
+        message: divalia.setting.message_delete,
         title: "Confirmation",
         buttons: {
             yes: {
                 label: "Yes",
                 className: "btn-success",
                 callback: function () {
-                    $(kecik.setting.loading).modal('show');
+                    $(divalia.setting.loading).modal('show');
                     $.ajax({
-                        url: kecik.setting.delete_url, // request ke file load_data.php
+                        url: divalia.setting.delete_url, // request ke file load_data.php
                         data: id,
                         type: "POST",
                         dataType: "json",
                         success: function (data) {
 
                             if ($.isFunction(callback)) {
-                                kecik.setting.delete_func = callback;
-                            } else if ($.isFunction(kecik.setting.delete_func)) {
-                                kecik.setting.delete_func();
+                                divalia.setting.delete_func = callback;
+                            } else if ($.isFunction(divalia.setting.delete_func)) {
+                                divalia.setting.delete_func();
                             }
 
-                            var oTable = $(kecik.setting.table).dataTable();
+                            var oTable = $(divalia.setting.table).dataTable();
                             $.ajax({
-                                url: kecik.setting.find_url,
+                                url: divalia.setting.find_url,
                                 data: null,
                                 type: "POST",
                                 dataType: "json",
@@ -737,10 +728,10 @@ kecik.Delete = function (id, callback) {
     });
 };
 
-kecik.View = function (id) {
-    $(kecik.setting.loading).modal('show');
+divalia.View = function (id) {
+    $(divalia.setting.loading).modal('show');
     $.ajax({
-        url: kecik.setting.get_url, // request ke file load_data.php
+        url: divalia.setting.get_url, // request ke file load_data.php
         data: id,
         type: "POST",
         dataType: "json",
@@ -748,21 +739,21 @@ kecik.View = function (id) {
 
             if (data.error == undefined) { // jika respon error tidak terdefinisi maka pengambilan data sukses
                 $.each(data, function (id) {
-                    if (!$.isPlainObject(eval('data.' + id) + '.' + kecik.setting.view_class)) {
-                        if ($('#' + id + '.' + kecik.setting.view_class).html() != undefined) {
+                    if (!$.isPlainObject(eval('data.' + id) + '.' + divalia.setting.view_class)) {
+                        if ($('#' + id + '.' + divalia.setting.view_class).html() != undefined) {
                             switch (id) {
                                 /**
                                  * Add Your custom Case if you need
                                  */
                                 case 'image':
-                                    $('#' + id + '.' + kecik.setting.view_class).hide();
+                                    $('#' + id + '.' + divalia.setting.view_class).hide();
                                     if (eval('data.' + id)) {
-                                        $('#' + id + '.' + kecik.setting.view_class).attr('src', eval('data.' + id));
-                                        $('#' + id + '.' + kecik.setting.view_class).show();
+                                        $('#' + id + '.' + divalia.setting.view_class).attr('src', eval('data.' + id));
+                                        $('#' + id + '.' + divalia.setting.view_class).show();
                                     }
                                     break;
                                 default:
-                                    $('#' + id + '.' + kecik.setting.view_class).html(eval('data.' + id));
+                                    $('#' + id + '.' + divalia.setting.view_class).html(eval('data.' + id));
                             }
                         }
                     }
@@ -770,7 +761,7 @@ kecik.View = function (id) {
                 });
 
 
-                $(kecik.setting.form_view).modal('show');
+                $(divalia.setting.form_view).modal('show');
 
             } else {
                 alert(data.error); // jika ada respon error tampilkan alert
@@ -781,18 +772,18 @@ kecik.View = function (id) {
 };
 
 
-kecik.beforeSubmit = function (callback) {
+divalia.beforeSubmit = function (callback) {
     if (typeof callback !== 'undefined') {
-        kecik.setting.before_submit_func = callback;
+        divalia.setting.before_submit_func = callback;
     } else {
-        kecik.setting.before_submit_func = true;
+        divalia.setting.before_submit_func = true;
     }
 };
 
-kecik.afterSubmit = function (callback) {
+divalia.afterSubmit = function (callback) {
     if (typeof callback !== 'undefined') {
-        kecik.setting.after_submit_func = callback;
+        divalia.setting.after_submit_func = callback;
     } else {
-        kecik.setting.after_submit_func = true;
+        divalia.setting.after_submit_func = true;
     }
 };
